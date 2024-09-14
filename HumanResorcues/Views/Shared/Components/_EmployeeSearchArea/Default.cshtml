@@ -1,0 +1,34 @@
+﻿@model HumanResorcues.Dtos.EmployeeSearchDto
+
+<form id="searchForm" method="post" class="d-flex mb-4 search-form">
+    <input asp-for="FirstName" class="form-control me-2 search-input" placeholder="Search by First Name" />
+
+    <button type="button" class="btn btn-outline-primary search-btn" onclick="submitForm('SearchEmployee')">İsme göre Tam Ara</button>
+    <button type="button" class="btn btn-outline-primary search-btn" onclick="submitForm('SearchEmployeeWildCardFirstName')">İsme göre Wild Card Ara</button>
+    <button type="button" class="btn btn-outline-primary search-btn" onclick="submitForm('SearchEmployeePrefixFirstName')">İsme göre Prefix Ara</button>
+    <button type="button" class="btn btn-outline-primary search-btn" onclick="submitForm('SearchEmployeeFuzzyFirstName')">İsme göre Fuzzy Ara</button>
+</form>
+
+<script>
+    function submitForm(action) {
+        var form = document.getElementById('searchForm');
+        switch (action) {
+            case 'SearchEmployee':
+                form.action = '@Url.Action("SearchEmployee", "HumanResource")';
+                break;
+            case 'SearchEmployeeWildCardFirstName':
+                form.action = '@Url.Action("SearchEmployeeWildCardFirstName", "HumanResource")';
+                break;
+            case 'SearchEmployeePrefixFirstName':
+                form.action = '@Url.Action("SearchEmployeePrefixFirstName", "HumanResource")';
+                break;
+            case 'SearchEmployeeFuzzyFirstName':
+                form.action = '@Url.Action("SearchEmployeeFuzzyFirstName", "HumanResource")';
+                break;
+            default:
+                form.action = '@Url.Action("SearchEmployeePage", "HumanResource")';
+                break;
+        }
+        form.submit();
+    }
+</script>
